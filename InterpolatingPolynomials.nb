@@ -1,0 +1,203 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7312,        193]
+NotebookOptionsPosition[      6677,        171]
+NotebookOutlinePosition[      7018,        186]
+CellTagsIndexPosition[      6975,        183]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Interpolating Polynomials", "Section",
+ CellChangeTimes->{{3.7280441251816726`*^9, 
+  3.7280441317903337`*^9}},ExpressionUUID->"e94de642-dbc7-46bf-a972-\
+724e9b14260f"],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", "Modules", " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.728044144343589*^9, 
+  3.7280441483839927`*^9}},ExpressionUUID->"af50047e-1f0f-44ce-af3d-\
+2e65331cfd60"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dividedDifference", "[", 
+   RowBox[{"XY_", ",", "x_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"X", "=", 
+       RowBox[{"XY", "\[LeftDoubleBracket]", 
+        RowBox[{"All", ",", "1"}], "\[RightDoubleBracket]"}]}], ",", " ", 
+      RowBox[{"Y", "=", 
+       RowBox[{"XY", "\[LeftDoubleBracket]", 
+        RowBox[{"All", ",", "2"}], "\[RightDoubleBracket]"}]}], ",", "n", ",",
+       "ddTable"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"n", " ", "=", " ", 
+      RowBox[{"Length", "[", "X", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"ddTable", " ", "=", " ", 
+      RowBox[{"Table", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"{", "n", "}"}], ",", 
+        RowBox[{"{", "n", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ddTable", "\[LeftDoubleBracket]", 
+       RowBox[{"All", ",", "1"}], "\[RightDoubleBracket]"}], "=", 
+      RowBox[{"Y", "\[LeftDoubleBracket]", "All", "\[RightDoubleBracket]"}]}],
+      ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"ddTable", "\[LeftDoubleBracket]", 
+         RowBox[{"k", ",", "j"}], "\[RightDoubleBracket]"}], "=", 
+        FractionBox[
+         RowBox[{
+          RowBox[{"ddTable", "\[LeftDoubleBracket]", 
+           RowBox[{"k", ",", 
+            RowBox[{"j", "-", "1"}]}], "\[RightDoubleBracket]"}], "-", 
+          RowBox[{"ddTable", "\[LeftDoubleBracket]", 
+           RowBox[{
+            RowBox[{"k", "-", "1"}], ",", 
+            RowBox[{"j", "-", "1"}]}], "\[RightDoubleBracket]"}]}], 
+         RowBox[{
+          RowBox[{"X", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}],
+           "-", 
+          RowBox[{"X", "\[LeftDoubleBracket]", 
+           RowBox[{"k", "-", "j", "+", "1"}], "\[RightDoubleBracket]"}]}]]}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{"j", ",", "2", ",", "n"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "j", ",", "n"}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", 
+      RowBox[{
+       UnderoverscriptBox["\[Sum]", 
+        RowBox[{"t", "=", "1"}], "n"], 
+       RowBox[{
+        RowBox[{"ddTable", "\[LeftDoubleBracket]", 
+         RowBox[{"t", ",", "t"}], "\[RightDoubleBracket]"}], "*", 
+        RowBox[{
+         UnderoverscriptBox["\[Product]", 
+          RowBox[{"i", "=", "1"}], 
+          RowBox[{"t", "-", "1"}]], 
+         RowBox[{"(", 
+          RowBox[{"x", "-", 
+           RowBox[{
+           "X", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}]}], 
+          ")"}]}]}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.7280423565638285`*^9, 3.728042408130985*^9}, {
+  3.7280424472218933`*^9, 3.728042742806449*^9}, {3.7280427883280005`*^9, 
+  3.7280430029124565`*^9}, {3.7280430369138565`*^9, 3.7280430486910343`*^9}, {
+  3.7280431520623703`*^9, 3.7280432458307467`*^9}, {3.7280433876049223`*^9, 
+  3.7280433890450664`*^9}, {3.7280434465718184`*^9, 3.7280434552436857`*^9}, {
+  3.7280434984000006`*^9, 3.728043506784839*^9}, {3.7280437727474327`*^9, 
+  3.7280437734515033`*^9}},ExpressionUUID->"b0b32837-d3f7-43a7-b49d-\
+f7b4b75a4ba4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"laGrange", "[", 
+   RowBox[{"dataPoints_", ",", "x_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"n", " ", "=", " ", 
+      RowBox[{"Length", "[", "dataPoints", "]"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Return", "[", 
+      RowBox[{
+       UnderoverscriptBox["\[Sum]", 
+        RowBox[{"j", "=", "1"}], "n"], 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"dataPoints", "\[LeftDoubleBracket]", 
+          RowBox[{"j", ",", "2"}], "\[RightDoubleBracket]"}], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           UnderoverscriptBox["\[Product]", 
+            RowBox[{"k", "=", "1"}], 
+            RowBox[{"j", "-", "1"}]], 
+           FractionBox[
+            RowBox[{"x", " ", "-", " ", 
+             RowBox[{"dataPoints", "\[LeftDoubleBracket]", 
+              RowBox[{"k", ",", "1"}], "\[RightDoubleBracket]"}]}], 
+            RowBox[{
+             RowBox[{"dataPoints", "\[LeftDoubleBracket]", 
+              RowBox[{"j", ",", "1"}], "\[RightDoubleBracket]"}], "-", 
+             RowBox[{"dataPoints", "\[LeftDoubleBracket]", 
+              RowBox[{"k", ",", "1"}], "\[RightDoubleBracket]"}]}]]}], ")"}], 
+         "*", 
+         RowBox[{"(", 
+          RowBox[{
+           UnderoverscriptBox["\[Product]", 
+            RowBox[{"k", "=", 
+             RowBox[{"j", "+", "1"}]}], "n"], 
+           FractionBox[
+            RowBox[{"x", " ", "-", " ", 
+             RowBox[{"dataPoints", "\[LeftDoubleBracket]", 
+              RowBox[{"k", ",", "1"}], "\[RightDoubleBracket]"}]}], 
+            RowBox[{
+             RowBox[{"dataPoints", "\[LeftDoubleBracket]", 
+              RowBox[{"j", ",", "1"}], "\[RightDoubleBracket]"}], "-", 
+             RowBox[{"dataPoints", "\[LeftDoubleBracket]", 
+              RowBox[{"k", ",", "1"}], "\[RightDoubleBracket]"}]}]]}], 
+          ")"}]}], ")"}]}], "]"}], ";"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.7275491259100957`*^9, 3.727549282461749*^9}, {
+  3.727549458330334*^9, 3.727549619963496*^9}, {3.727549735083007*^9, 
+  3.727549735794078*^9}, {3.727550206288122*^9, 3.7275502112796216`*^9}, {
+  3.727550380093501*^9, 3.727550381621654*^9}, {3.728043296859849*^9, 
+  3.7280432973869014`*^9}, {3.728043357393902*^9, 3.7280433580019627`*^9}, {
+  3.72804371150931*^9, 
+  3.728043711989358*^9}},ExpressionUUID->"a876f419-0698-4a8f-9a21-\
+65944b1452dd"]
+}, Open  ]]
+},
+WindowSize->{944, 982},
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (April 18, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 174, 3, 70, "Section", "ExpressionUUID" -> \
+"e94de642-dbc7-46bf-a972-724e9b14260f"],
+Cell[757, 27, 195, 4, 30, "Input", "ExpressionUUID" -> \
+"af50047e-1f0f-44ce-af3d-2e65331cfd60"],
+Cell[955, 33, 3251, 76, 217, "Input", "ExpressionUUID" -> \
+"b0b32837-d3f7-43a7-b49d-f7b4b75a4ba4"],
+Cell[4209, 111, 2452, 57, 123, "Input", "ExpressionUUID" -> \
+"a876f419-0698-4a8f-9a21-65944b1452dd"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
